@@ -1,0 +1,31 @@
+﻿<Window x:Class="WpfApplProject.WindowZa9vka"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApplProject"
+        mc:Ignorable="d"
+        Title="Подача заявки" Height="450" Width="400">
+    <Grid HorizontalAlignment="Center" Width="400">
+        <Menu Margin="109,105,109,39"/>
+        <TextBox x:Name="NameTextBox" HorizontalAlignment="Center" Margin="0,129,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="148" Height="19"/>
+        <ComboBox x:Name="ComboReason" HorizontalAlignment="Center" Margin="0,209,0,0" VerticalAlignment="Top" Width="148" Height="23"/>
+        <Label Content="Подача заявки&#xA;" HorizontalAlignment="Center" Margin="0,25,0,0" VerticalAlignment="Top" Width="262" FontSize="30" FontFamily="Arial Black" FontWeight="Bold" Height="41"/>
+        <Button Content="Подать заявку" HorizontalAlignment="Center" FontFamily="Bahnschrift" Background="#FF8CC1D8" VerticalAlignment="Top" Height="28" Width="110" FontSize="15" Margin="0,333,0,0" Click="Button_Click">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="7"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <Label Content="Фамилия И.О." HorizontalAlignment="Left" Margin="122,108,0,0" VerticalAlignment="Top" Height="24"/>
+        <Label Content="Техника" HorizontalAlignment="Left" Margin="123,148,0,0" VerticalAlignment="Top" Height="23"/>
+        <Label Content="Причина&#xA;" HorizontalAlignment="Left" Margin="123,187,0,0" VerticalAlignment="Top" Height="26"/>
+        <Label Content="Приоритет&#xA;" HorizontalAlignment="Left" Margin="123,231,0,0" VerticalAlignment="Top"/>
+        <Label Content="Наименование датчика" HorizontalAlignment="Left" Margin="122,276,0,0" VerticalAlignment="Top" Height="25" Width="142"/>
+        <TextBox x:Name="TechTextBox" HorizontalAlignment="Center" Margin="0,168,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="148" Height="19"/>
+        <ComboBox x:Name="ComboPriority" HorizontalAlignment="Center" Margin="0,253,0,0" VerticalAlignment="Top" Width="148" Height="23"/>
+        <TextBox x:Name="SensorTextBox" HorizontalAlignment="Center" Margin="0,298,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="148" Height="19"/>
+    </Grid>
+</Window>

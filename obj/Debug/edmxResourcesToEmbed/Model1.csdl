@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="proizvolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID_User" />
+    </Key>
+    <Property Name="ID_User" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Role" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ID_Заявка" Type="Int32" />
+    <NavigationProperty Name="Заявка" Relationship="Self.R_2" FromRole="User" ToRole="Заявка" />
+  </EntityType>
+  <EntityType Name="Заявка">
+    <Key>
+      <PropertyRef Name="ID_Заявка" />
+    </Key>
+    <Property Name="ID_Заявка" Type="Int32" Nullable="false" />
+    <Property Name="Заказчик" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Статус" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Причина" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Техника" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Приоритет" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Дата_заявки" Type="DateTime" Precision="0" />
+    <Property Name="ID_Техника" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.R_2" FromRole="Заявка" ToRole="User" />
+    <NavigationProperty Name="Техника1" Relationship="Self.R_1" FromRole="Заявка" ToRole="Техника" />
+  </EntityType>
+  <EntityType Name="Техника">
+    <Key>
+      <PropertyRef Name="ID_Техника" />
+    </Key>
+    <Property Name="ID_Техника" Type="Int32" Nullable="false" />
+    <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Статус" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Состояние" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Текущее_нахождение" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Предприятие" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="Дата_создания" Type="DateTime" Precision="0" />
+    <Property Name="Комментарий" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Заявка" Relationship="Self.R_1" FromRole="Техника" ToRole="Заявка" />
+  </EntityType>
+  <Association Name="R_2">
+    <End Role="Заявка" Type="Self.Заявка" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Заявка">
+        <PropertyRef Name="ID_Заявка" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="ID_Заявка" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_1">
+    <End Role="Техника" Type="Self.Техника" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Заявка" Type="Self.Заявка" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Техника">
+        <PropertyRef Name="ID_Техника" />
+      </Principal>
+      <Dependent Role="Заявка">
+        <PropertyRef Name="ID_Техника" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="kur1Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="User" EntityType="Self.User" />
+    <EntitySet Name="Заявка" EntityType="Self.Заявка" />
+    <EntitySet Name="Техника" EntityType="Self.Техника" />
+    <AssociationSet Name="R_2" Association="Self.R_2">
+      <End Role="Заявка" EntitySet="Заявка" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="R_1" Association="Self.R_1">
+      <End Role="Техника" EntitySet="Техника" />
+      <End Role="Заявка" EntitySet="Заявка" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
