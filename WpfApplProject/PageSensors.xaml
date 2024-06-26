@@ -1,0 +1,85 @@
+﻿<Page x:Class="WpfApplProject.PageSensors"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:command="clr-namespace:WpfApplProject.Commands"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApplProject"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageSensors">
+
+    <Grid Margin="3" Style="{StaticResource SecondWindowStyle}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="390*"/>
+            <ColumnDefinition Width="210*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="34*"/>
+            <RowDefinition Height="36*"/>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="139*"/>
+            <RowDefinition Height="59*"/>
+        </Grid.RowDefinitions>
+
+        <DataGrid Grid.Column="0" x:Name="DataGridSensors" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.RowSpan="5" Margin="10,54,10,0" Grid.ColumnSpan="2" Height="380" >
+
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Дата создания" Binding="{Binding CreateDate}"/>
+                <DataGridTextColumn Header="Идентификатор датчика" Binding="{Binding SensorID}"/>
+                <DataGridTextColumn Header="Наименование датчика" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Статус" x:Name="Status1" Binding="{Binding Status}"/>
+                <DataGridTextColumn Header="Состояние" Binding="{Binding Condition}"/>
+                <DataGridTextColumn Header="Нахождение" Binding="{Binding Location}"/>
+                <DataGridTextColumn Header="Предприятие" Binding="{Binding Company}"/>
+                <DataGridTextColumn Header="Комментарий" Binding="{Binding Commentary}"/>
+                
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <ToolBar Grid.ColumnSpan="2" Grid.Column="0" x:Name="ToolBar1" VerticalAlignment="Top" Height="30" Margin="0,4,0,0">
+            <Button x:Name="Undo" Command="Undo" ToolTip="Отменить редактирование/создание"
+        Margin="5,2,5,2">
+                <Image Source="Images/Undo.png" />
+            </Button>
+            <Button x:Name="Add" Command="New" ToolTip="Добавить "
+        Margin="5,2,5,2">
+                <Image Source="Images/Add.png" />
+            </Button>
+            <Button x:Name="Edit" Command="{x:Static command:DataCommands.Edit}" ToolTip="Редактировать данные"
+        Margin="5,2,5,2">
+                <Image Source="Images/edit.png" />
+            </Button>
+
+            <Button x:Name="Save" Command="Save" ToolTip="Сохранить данные"
+        Margin="5,2,5,2">
+                <Image Source="Images/Save.png" />
+            </Button>
+            <Button x:Name="Delete" Command="{x:Static command:DataCommands.Delete}" ToolTip="Удалить"
+        Margin="5,2,5,2">
+                <Image Source="Images/Delete.png" />
+            </Button>
+
+        </ToolBar>
+        <TextBlock Grid.Column="0" Width="114" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Foreground="#F0F0F0" Margin="14,0,0,48" Grid.RowSpan="2" ><Run Text="Фонд оборудования"/></TextBlock>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="195,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="ru-ru" /><LineBreak/><Run Language="ru-ru"/>
+        <Hyperlink NavigateUri="PageEmployee.xaml" Foreground="#F0F0F0"> 
+        Заявки
+         </Hyperlink>
+        </TextBlock>
+    </Grid>
+
+    <Page.CommandBindings>
+        <CommandBinding Command="Undo" Executed="Undo_Executed" CanExecute="Undo_CanExecute" />
+        <CommandBinding Command="New" Executed="New_Executed" CanExecute="New_CanExecute"/>
+        <CommandBinding Command="{x:Static command:DataCommands.Edit}" Executed="Edit_Executed" CanExecute="Edit_CanExecute"/>
+        <CommandBinding Command="Save" Executed="Save_Executed" CanExecute="Save_CanExecute"/>
+
+        <CommandBinding Command="{x:Static command:DataCommands.Delete}" Executed="Delete_Executed" CanExecute="Delete_CanExecute"/>
+
+
+
+
+    </Page.CommandBindings>
+</Page>
